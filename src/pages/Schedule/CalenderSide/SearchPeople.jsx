@@ -63,7 +63,7 @@ const SearchPeople = () => {
                 sx={{
                   borderBottom: '1px solid',
                   gap: '20px',
-                  padding: '0px 0px 15px 18px',
+                  padding: '0px 0px 15px 4px',
                   alignItems: 'center',
                   borderColor: theme => theme.palette.background.custom,
                 }}

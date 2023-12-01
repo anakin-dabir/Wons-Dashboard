@@ -11,7 +11,11 @@ import {Stack} from '@mui/material';
 const Schedule = () => {
   return (
     <Header name='Schedule List' rightComponent={<AddBtn name='Add New' />}>
-      <Stack direction='row' gap={4} sx={{width: '100%'}}>
+      <Stack
+        direction={{xs: 'column', xl: 'row'}}
+        gap={4}
+        sx={{width: '100%', position: 'relative', height: '100%'}}
+      >
         <CalenderSide />
         <TableSide />
       </Stack>

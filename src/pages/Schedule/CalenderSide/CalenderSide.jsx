@@ -12,8 +12,10 @@ const CalenderSide = () => {
     <>
       <Stack
         sx={{
-          width: '500px',
-          display: {xs: 'none', xl: 'flex'},
+          width: {xs: '100%', xl: '30%'},
+          maxWidth: '385px',
+          height: 1000,
+          display: {xs: 'flex', xl: 'flex'},
           justifyContent: 'space-between',
           bgcolor: 'neutral.main',
           padding: '30px 35px',
