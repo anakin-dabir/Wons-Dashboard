@@ -1,6 +1,5 @@
-// /src/index.jsx
-// Thursday, November 23rd 2023, 5:52 pm
-
+// /src/main.jsx
+// Friday, December 1st 2023, 7:32 am
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
