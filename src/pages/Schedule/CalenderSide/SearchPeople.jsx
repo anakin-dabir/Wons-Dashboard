@@ -49,7 +49,7 @@ const SearchPeople = () => {
         onChange={searchFunction}
         placeholder='Search for People'
       />
-      <Stack gap='10px'>
+      <Stack gap='10px' sx={{overflowY: 'auto', height: '240px'}}>
         {isPending ? (
           <Typography>Loading...</Typography>
         ) : searchData.length === 0 ? (

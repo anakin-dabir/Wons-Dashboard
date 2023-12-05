@@ -4,7 +4,7 @@
 import {Box, Button} from '@mui/material';
 import React from 'react';
 
-const Hamburger = ({sideBarOpened, toggleSideBar}) => {
+const Hamburger = ({toggleSideBar}) => {
   return (
     <Button
       variant='text'
@@ -13,10 +13,9 @@ const Hamburger = ({sideBarOpened, toggleSideBar}) => {
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: '8px',
-        zIndex: 100,
         display: {xs: 'flex', sm: 'none'},
         position: 'sticky',
-        marginY: sideBarOpened ? '20px' : '5px',
+        marginY: '5px',
         marginLeft: '18px',
       }}
       onClick={toggleSideBar}
@@ -27,24 +26,14 @@ const Hamburger = ({sideBarOpened, toggleSideBar}) => {
           height: '0.25rem',
           width: '1.75rem',
           borderRadius: '8px',
-          transition: theme =>
-            theme.transitions.create(['transform'], {
-              duration: theme.transitions.duration.shortest,
-            }),
-          transform: sideBarOpened && 'translateY(6px) rotate(45deg)',
         }}
       ></Box>
       <Box
         sx={{
           backgroundColor: 'text.dim',
           height: '0.25rem',
-          width: sideBarOpened ? '1.75rem' : '1rem',
+          width: '1rem',
           borderRadius: '8px',
-          transition: theme =>
-            theme.transitions.create(['transform'], {
-              duration: theme.transitions.duration.shortest,
-            }),
-          transform: sideBarOpened && 'translateY(-6px) rotate(-45deg)',
         }}
       ></Box>
     </Button>

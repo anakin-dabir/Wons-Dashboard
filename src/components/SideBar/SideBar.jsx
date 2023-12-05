@@ -1,7 +1,7 @@
 // /src/components/SideBar/SideBar.jsx
 // Monday, November 27th 2023, 9:50 pm
 
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {Stack} from '@mui/material';
 import Light from './Light';
@@ -9,30 +9,20 @@ import UserData from './UserData';
 import LogoImg from './LogoImg';
 import Hamburger from './Hamburger';
 import Link from './Link';
-import Overlay from './Overlay';
+import Overlay from '../Overlay';
+import useSidebar from '../../utils/useSidebar';
+import CloseBtn from '../CloseBtn';
 
 const SideBar = () => {
-  const [sideBarOpened, setSideBarOpened] = useState(false);
+  const {sideBarOpened, toggleSideBar} = useSidebar();
   const {pathname} = useLocation();
-  const toggleSideBar = () => {
-    setSideBarOpened(prev => !prev);
-  };
   useEffect(() => {
-    const handleResize = () => {
-      sideBarOpened && window.innerWidth >= 600 && setSideBarOpened(false);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [sideBarOpened]);
-  useEffect(() => {
-    sideBarOpened && setSideBarOpened(false);
+    sideBarOpened && toggleSideBar();
   }, [pathname]);
 
   return (
     <>
-      <Hamburger sideBarOpened={sideBarOpened} toggleSideBar={toggleSideBar} />
+      <Hamburger toggleSideBar={toggleSideBar} />
       <Stack
         className='h-screen'
         bgcolor='neutral.main'
@@ -49,6 +39,7 @@ const SideBar = () => {
           transition: theme => theme.transitions.create(['transform']),
         }}
       >
+        {sideBarOpened && <CloseBtn toggleSideBar={toggleSideBar} />}
         <LogoImg />
         <Link />
         <Stack sx={{gap: '30px'}}>
@@ -56,7 +47,7 @@ const SideBar = () => {
           <UserData />
         </Stack>
       </Stack>
-      {sideBarOpened && <Overlay setSideBarOpened={setSideBarOpened} />}
+      {sideBarOpened && <Overlay toggleSideBar={toggleSideBar} />}
     </>
   );
 };
