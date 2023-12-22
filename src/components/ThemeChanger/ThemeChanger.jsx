@@ -1,28 +1,24 @@
 // /src/components/ThemeChanger.jsx
 // Thursday, November 23rd 2023, 5:52 pm
 
-import React, {useContext} from 'react';
+import React from 'react';
 import DarkMode from '../../assets/dark.png';
 import LightMode from '../../assets/light.png';
 import Button from '@mui/material/Button';
-import {ThemeSelectorProvider} from '../CustomThemeProvider/CustomThemeProvider';
+import {useDispatch, useSelector} from 'react-redux';
+import {toggleTheme} from '../../store/slice/themeSlice';
 
 const ThemeChanger = () => {
-  const {mode, setMode} = useContext(ThemeSelectorProvider);
-  const changeMode = () => {
-    const themeMode = {light: 'light', dark: 'dark'};
-    const themeItem = 'theme';
-    if (mode === themeMode.light) {
-      setMode(themeMode.dark);
-      localStorage.setItem(themeItem, themeMode.dark);
-    } else {
-      setMode(themeMode.light);
-      localStorage.setItem(themeItem, themeMode.light);
-    }
-  };
+  const dispatch = useDispatch();
+  const mode = useSelector(state => state.theme.mode);
+
   return (
     <>
-      <Button onClick={changeMode} variant='text' sx={{position: 'absolute', top: 8, right: 12}}>
+      <Button
+        onClick={() => dispatch(toggleTheme())}
+        variant='text'
+        sx={{position: 'absolute', top: 8, right: 12}}
+      >
         <img src={mode === 'light' ? DarkMode : LightMode} alt='themeBtn' />
       </Button>
     </>

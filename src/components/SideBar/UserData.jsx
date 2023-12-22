@@ -4,8 +4,17 @@
 import UserAvatar from '../../assets/user.png';
 import {Stack, Typography, CardMedia, Button} from '@mui/material';
 import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {clearUser} from '../../store/slice/authSlice';
+import toast from 'react-hot-toast';
 
 const UserData = () => {
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(clearUser());
+    toast.success('User logged out successfully');
+  };
   return (
     <Stack
       sx={{
@@ -30,10 +39,10 @@ const UserData = () => {
           display: {sm: 'none', lg: 'flex'},
         }}
       >
-        <Typography variant='caption'>Easin Arafat</Typography>
+        <Typography variant='caption'>{user?.fullName}</Typography>
         <Typography sx={{opacity: 0.5, fontSize: '0.65rem'}}>Free Account</Typography>
       </Stack>
-      <Button variant='text'>
+      <Button variant='text' onClick={logout}>
         <svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'>
           <g opacity='0.4'>
             <path

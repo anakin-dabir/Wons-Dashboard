@@ -3,8 +3,7 @@
 
 import React from 'react';
 import {Grid, CardMedia} from '@mui/material';
-import Illustration from '../../assets/Illustration.png';
-import Toast from '../../components/Toast/Toast';
+import Illustration from '../../assets/SignupIllustration.png';
 
 const Banner = () => {
   return (
@@ -14,7 +13,6 @@ const Banner = () => {
         src={Illustration}
         sx={{width: {md: '447px', lg: 'auto'}, height: {md: '422px', lg: 'auto'}}}
       />
-      <Toast />
     </Grid>
   );
 };

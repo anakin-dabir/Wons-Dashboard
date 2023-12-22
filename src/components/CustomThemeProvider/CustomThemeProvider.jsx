@@ -2,8 +2,24 @@
 // Thursday, November 23rd 2023, 5:52 pm
 
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
-import React, {useState, useMemo, createContext} from 'react';
+import React, {useMemo} from 'react';
 import {lightMode, darkMode} from '../../theme/theme';
+import {useSelector} from 'react-redux';
+
+const ButtonProps = {
+  defaultProps: {
+    disableElevation: true,
+    variant: 'contained',
+  },
+  styleOverrides: {
+    root: {
+      textTransform: 'none',
+      flexShrink: 0,
+      height: 50,
+      borderRadius: 8,
+    },
+  },
+};
 
 const customProps = mode => ({
   mode,
@@ -16,20 +32,8 @@ const customProps = mode => ({
         disableUnderline: true,
       },
     },
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true,
-        variant: 'contained',
-      },
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-          flexShrink: 0,
-          height: 50,
-          borderRadius: 8,
-        },
-      },
-    },
+    MuiButton: ButtonProps,
+    MuiLoadingButton: ButtonProps,
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -41,17 +45,14 @@ const customProps = mode => ({
   ...(mode === 'light' ? lightMode : darkMode),
 });
 
-export const ThemeSelectorProvider = createContext();
 const CustomThemeProvider = ({children}) => {
-  const [mode, setMode] = useState(localStorage.getItem('theme') || 'light');
+  const mode = useSelector(state => state.theme.mode);
   const theme = useMemo(() => createTheme(customProps(mode)), [mode]);
   return (
-    <ThemeSelectorProvider.Provider value={{mode, setMode}}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </ThemeSelectorProvider.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 };
 

@@ -6,8 +6,10 @@ import {Outlet} from 'react-router-dom';
 import SideBar from '../SideBar';
 import {Box} from '@mui/material';
 
-const Layout = () => {
-  return (
+const Layout = ({sidebar = false} = {}) => {
+  return !sidebar ? (
+    <Outlet />
+  ) : (
     <>
       <SideBar />
       <Box

@@ -19,6 +19,7 @@ import {
   AvatarGroup,
   Input,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import DoneIcon from '@mui/icons-material/Done';
 import {autocompleteClasses} from '@mui/material/Autocomplete';
 
@@ -57,6 +58,7 @@ export const lightMode = {
       custom: '#3A36DB',
       dim: '#000',
       tag: 'rgba(0, 0, 0, 0.5)',
+      reverse: '#ffffff',
     },
   },
 };
@@ -96,9 +98,17 @@ export const darkMode = {
       custom: '#605CFF',
       dim: '#fff',
       tag: 'rgba(255, 255, 255, 0.5)',
+      reverse: '#000000',
     },
   },
 };
+
+export const FormButton = styled(LoadingButton)(({theme}) => ({
+  '&.Mui-disabled': {backgroundColor: theme.palette.text.dim},
+  '& .MuiLoadingButton-loadingIndicator': {
+    color: theme.palette.text.reverse,
+  },
+}));
 
 export const StyledInputField = styled(Input)(({theme, props}) => {
   const [palette, property] = (props.backgroundColor || 'background.main').split('.');
@@ -112,7 +122,6 @@ export const StyledInputField = styled(Input)(({theme, props}) => {
     margin: props.margin || 0,
     '&.Mui-error': {
       border: `0.5px solid ${theme.palette.danger.main}`,
-      backgroundColor: theme.palette.neutral.main,
     },
   };
 });

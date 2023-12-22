@@ -1,7 +1,8 @@
+/*eslint-disable */
 // /src/pages/Login/Form.jsx
 // Monday, November 27th 2023, 9:45 pm
 
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {
   InputLabel,
   Stack,
@@ -9,19 +10,29 @@ import {
   InputAdornment,
   FormControlLabel,
   Button,
-  Link,
   Checkbox,
 } from '@mui/material';
+import toast from 'react-hot-toast';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import InputField from '../../components/InputField';
 import {Link as NavLink} from 'react-router-dom';
 import useValidation from '../../components/forms/useValidation';
 import {LoginValidationSchema} from '../../components/forms/ValidationSchema';
+import ErrorTooltip from '../../components/ErrorTooltip/ErrorTooltip';
+import {useLoginMutation} from '../../services/authApi';
+import {FormButton} from '../../theme/theme';
+import {setUser} from '../../store/slice/authSlice';
+import {useDispatch} from 'react-redux';
 
 const Form = () => {
   const initialValues = {email: '', password: ''};
-  const handleSubmit = values => {};
+  const [login, {isLoading}] = useLoginMutation();
+
+  const handleSubmit = values => {
+    login(values);
+  };
+
   const formik = useValidation({
     initialValues,
     handleSubmit,
@@ -41,35 +52,35 @@ const Form = () => {
           onChange={formik.handleChange}
           placeholder='example@gmail.com'
           error={Boolean(formik.touched.email && formik.errors.email)}
+          endIcon={
+            formik.touched.email &&
+            formik.errors.email && <ErrorTooltip message={formik.errors.email} />
+          }
         />
-        {formik.touched.email && formik.errors.email && (
-          <Typography variant='body2' color='danger.main'>
-            {formik.errors.email}
-          </Typography>
-        )}
-        <InputLabel htmlFor='passwd'>Password</InputLabel>
+        <InputLabel htmlFor='password'>Password</InputLabel>
         <InputField
           value={formik.values.password}
           onChange={formik.handleChange}
           id='password'
           type={passwdType}
+          autoComplete='off'
           placeholder='●●●●●●'
           error={Boolean(formik.touched.password && formik.errors.password)}
-          endAdornment={
-            <InputAdornment sx={{cursor: 'pointer'}} position='end' onClick={togglePassword}>
-              {passwdType === 'password' ? (
-                <VisibilityIcon sx={{color: 'text.primary', opacity: 0.5, fontSize: '16px'}} />
-              ) : (
-                <VisibilityOffIcon sx={{color: 'text.primary', opacity: 0.5, fontSize: '16px'}} />
-              )}
-            </InputAdornment>
+          endIcon={
+            formik.touched.password && formik.errors.password ? (
+              <ErrorTooltip message={formik.errors.password} />
+            ) : (
+              <InputAdornment sx={{cursor: 'pointer'}} position='end' onClick={togglePassword}>
+                {passwdType === 'password' ? (
+                  <VisibilityIcon sx={{color: 'text.primary', opacity: 0.5, fontSize: '16px'}} />
+                ) : (
+                  <VisibilityOffIcon sx={{color: 'text.primary', opacity: 0.5, fontSize: '16px'}} />
+                )}
+              </InputAdornment>
+            )
           }
         />
-        {formik.touched.password && formik.errors.password && (
-          <Typography variant='body2' color='danger.main'>
-            {formik.errors.password}
-          </Typography>
-        )}
+
         <Stack
           direction='row'
           justifyContent='space-between'
@@ -92,15 +103,19 @@ const Form = () => {
             </Typography>
           </NavLink>
         </Stack>
-        <Button fullWidth onClick={formik.handleSubmit}>
+        <FormButton loading={isLoading} fullWidth onClick={formik.handleSubmit}>
           Log In
-        </Button>
-        <Typography align='center' variant='body2' fontWeight={500}>
-          Don&apos;t have account yet?{' '}
-          <Link underline='none' href='#'>
-            New Account
-          </Link>
-        </Typography>
+        </FormButton>
+        <Stack direction='row' alignSelf='center' gap={1}>
+          <Typography variant='body2' fontWeight={500}>
+            Don&apos;t have account yet?
+          </Typography>
+          <NavLink to='/register' style={{textDecoration: 'none'}}>
+            <Typography variant='body2' color='primary'>
+              New Account
+            </Typography>
+          </NavLink>
+        </Stack>
       </Stack>
     </form>
   );

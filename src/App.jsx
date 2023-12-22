@@ -10,12 +10,16 @@ import DashBoard from './pages/Dashboard';
 import Layout from './components/Layout';
 import Settings from './pages/Settings';
 import Schedule from './pages/Schedule';
+import SignUp from './pages/SignUp/SignUp';
+import Toast from './components/Toast/Toast';
+import useAuth from './hooks/useAuth';
 
 const App = () => {
+  const token = useAuth();
   const element = useRoutes([
     {
       path: '/',
-      element: <Layout />,
+      element: !token ? <Navigate to='/login' /> : <Layout sidebar />,
       children: [
         {path: '/', element: <Navigate to='/dashboard' />},
         {path: '/dashboard', element: <DashBoard />},
@@ -28,10 +32,24 @@ const App = () => {
         {path: '/settings', element: <Settings />},
       ],
     },
-    {path: '/login', element: <Login />},
-    {path: '/reset', element: <ResetPassword />},
+    {
+      path: '/',
+      element: token ? <Navigate to='/dashboard' /> : <Layout />,
+      children: [
+        {path: '/', element: <Navigate to='/login' />},
+        {path: '/login', element: <Login />},
+        {path: '/reset', element: <ResetPassword />},
+        {path: '/register', element: <SignUp />},
+      ],
+    },
   ]);
-  return <CustomThemeProvider>{element}</CustomThemeProvider>;
+
+  return (
+    <CustomThemeProvider>
+      <Toast />
+      {element}
+    </CustomThemeProvider>
+  );
 };
 
 export default App;

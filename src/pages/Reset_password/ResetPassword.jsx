@@ -7,7 +7,8 @@ import {Box, Stack, Typography, Button, InputLabel, CardMedia} from '@mui/materi
 import Logo from '../../assets/Frame.png';
 import InputField from '../../components/InputField';
 import ThemeChanger from '../../components/ThemeChanger';
-import {emailValidationSchema} from '../../components/forms/ValidationSchema';
+import {ResetPasswordValidationSchema} from '../../components/forms/ValidationSchema';
+import ErrorTooltip from '../../components/ErrorTooltip/ErrorTooltip';
 
 const ResetPassword = () => {
   const initialValues = {
@@ -17,7 +18,7 @@ const ResetPassword = () => {
   const formik = useValidation({
     initialValues,
     handleSubmit,
-    validationSchema: emailValidationSchema,
+    validationSchema: ResetPasswordValidationSchema,
   });
   return (
     <>
@@ -49,10 +50,11 @@ const ResetPassword = () => {
                 name='email'
                 placeholder='example@gmail.com'
                 error={Boolean(formik.touched.email && formik.errors.email)}
+                endIcon={
+                  formik.touched.email &&
+                  formik.errors.email && <ErrorTooltip message={formik.errors.email} />
+                }
               />
-              {formik.touched.email && formik.errors.email && (
-                <Typography color='danger.main'>{formik.errors.email}</Typography>
-              )}
               <Button fullWidth type='submit'>
                 Reset Your Password
               </Button>
