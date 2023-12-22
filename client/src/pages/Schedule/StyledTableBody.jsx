@@ -12,11 +12,11 @@ import {
   StyledTableRow,
   SvgIcon,
 } from '../../theme/theme';
-import Calendericon from '../../assets/Calendericon.svg';
-import Clockicon from '../../assets/Clockicon.svg';
-import Locationicon from '../../assets/Locationicon.svg';
-import Editicon from '../../assets/Editicon.svg';
-import Deleteicon from '../../assets/Deleteicon.svg';
+import {ReactComponent as Calendericon} from '../../assets/Calendericon.svg';
+import {ReactComponent as Clockicon} from '../../assets/Clockicon.svg';
+import {ReactComponent as Locationicon} from '../../assets/Locationicon.svg';
+import {ReactComponent as Editicon} from '../../assets/Editicon.svg';
+import {ReactComponent as Deleteicon} from '../../assets/Deleteicon.svg';
 
 const StyledTableBody = ({handleClick, sortedRows, emptyRows, isSelected}) => {
   return (
