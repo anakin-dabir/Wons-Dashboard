@@ -14,7 +14,7 @@ const UserData = () => {
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(clearUser());
-    Cookies.remove('');
+    Cookies.remove('jwt_token');
     toast.success('User logged out successfully');
   };
   return (
