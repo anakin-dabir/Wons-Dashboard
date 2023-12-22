@@ -5,7 +5,7 @@ import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 // import Cookies from 'js-cookie';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_URL,
+  baseUrl: 'https://wons-dashboard-server.cyclic.app',
   credentials: 'include',
   // prepareHeaders: headers => {
   //   const token = Cookies.get('jwt_token');
