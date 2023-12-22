@@ -2,7 +2,8 @@
 // Thursday, November 23rd 2023, 5:52 pm
 
 import React from 'react';
-import {Input, InputAdornment} from '@mui/material';
+import {InputAdornment} from '@mui/material';
+import {StyledInputField} from '../../theme/theme';
 
 const InputField = ({
   backgroundColor,
@@ -11,15 +12,23 @@ const InputField = ({
   borderRadius,
   padding,
   margin = 0,
-  customBgColor,
   startIcon = null,
-  sx,
-  ...props
+  endIcon = null,
+  error = false,
+  ...rest
 }) => {
-  const [palette, property] = (backgroundColor || 'background.main').split('.');
   return (
-    <Input
-      {...props}
+    <StyledInputField
+      {...rest}
+      error={error}
+      props={{backgroundColor, width, height, borderRadius, padding, margin}}
+      endAdornment={
+        endIcon && (
+          <InputAdornment sx={{paddingX: '4px'}} position='end'>
+            {endIcon}
+          </InputAdornment>
+        )
+      }
       startAdornment={
         startIcon && (
           <InputAdornment sx={{paddingRight: '4px'}} position='start'>
@@ -27,19 +36,6 @@ const InputField = ({
           </InputAdornment>
         )
       }
-      sx={theme => ({
-        backgroundColor: customBgColor || theme.palette[palette][property],
-        height: height || 50,
-        width: width || '100%',
-        flexShrink: 0,
-        borderRadius: borderRadius || '8px',
-        padding: padding || '10px 15px',
-        margin: margin,
-        '&.Mui-error': {
-          borderBottom: '0.5px solid red',
-        },
-        ...sx,
-      })}
     />
   );
 };

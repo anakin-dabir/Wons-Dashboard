@@ -12,13 +12,16 @@ const useSidebar = ({width_to_close_sidebar = 600} = {}) => {
   };
   useEffect(() => {
     const handleResize = () => {
-      sideBarOpened && window.innerWidth >= width_to_close_sidebar && setSideBarOpened(false);
-      window.innerWidth >= width_to_close_sidebar && set_which_emelent_to_show('');
+      if (width_to_close_sidebar) {
+        sideBarOpened && window.innerWidth >= width_to_close_sidebar && setSideBarOpened(false);
+        window.innerWidth >= width_to_close_sidebar && set_which_emelent_to_show('');
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+    // eslint-disable-next-line
   }, [sideBarOpened]);
   return {sideBarOpened, toggleSideBar, which_element_to_show, set_which_emelent_to_show};
 };

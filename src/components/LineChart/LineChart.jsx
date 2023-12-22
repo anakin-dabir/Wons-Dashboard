@@ -140,6 +140,7 @@ const LineChart = ({data}) => {
     });
     series.data.setAll(data);
     return () => root.dispose();
+    // eslint-disable-next-line
   }, []);
 
   return <Box id={id} sx={{height: '100%', width: '100%'}}></Box>;

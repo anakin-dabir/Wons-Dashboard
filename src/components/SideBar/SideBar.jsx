@@ -10,7 +10,7 @@ import LogoImg from './LogoImg';
 import Hamburger from './Hamburger';
 import Link from './Link';
 import Overlay from '../Overlay';
-import useSidebar from '../../utils/useSidebar';
+import useSidebar from '../../hooks/useSidebar';
 import CloseBtn from '../CloseBtn';
 
 const SideBar = () => {
@@ -18,6 +18,7 @@ const SideBar = () => {
   const {pathname} = useLocation();
   useEffect(() => {
     sideBarOpened && toggleSideBar();
+    // eslint-disable-next-line
   }, [pathname]);
 
   return (

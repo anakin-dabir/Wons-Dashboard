@@ -2,11 +2,12 @@
 // Thursday, November 30th 2023, 6:53 am
 
 import React, {useState} from 'react';
-import {Box, Table, TableContainer, TablePagination} from '@mui/material';
+import {TableContainer, TablePagination} from '@mui/material';
 import StyledTableBody from './StyledTableBody';
 import StyledTableHead from './StyledTableHead';
-import usePagination from '../../../utils/usePagination';
-import useSort from '../../../utils/useSort';
+import usePagination from '../../hooks/usePagination';
+import useSort from '../../hooks/useSort';
+import {StyledTable, TableParentContainer} from '../../theme/theme';
 
 const rows = [
   {id: 1, date: '12 December, 2021', time: '10:15 PM', location: 'Affice Meeting'},
@@ -68,16 +69,9 @@ const TableSide = () => {
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{width: {xs: '100%', xl: '70%', flex: 1}}}>
+    <TableParentContainer>
       <TableContainer>
-        <Table
-          sx={{
-            minWidth: 800,
-            borderCollapse: 'separate',
-            borderSpacing: '0 14px',
-          }}
-          size='small'
-        >
+        <StyledTable size='small'>
           <StyledTableHead
             numSelected={selected.length}
             order={order}
@@ -92,7 +86,7 @@ const TableSide = () => {
             isSelected={isSelected}
             emptyRows={emptyRows}
           />
-        </Table>
+        </StyledTable>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[]}
@@ -102,7 +96,7 @@ const TableSide = () => {
         page={page}
         onPageChange={handleChangePage}
       />
-    </Box>
+    </TableParentContainer>
   );
 };
 

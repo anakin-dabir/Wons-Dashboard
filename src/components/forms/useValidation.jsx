@@ -2,9 +2,8 @@
 // Thursday, November 23rd 2023, 5:52 pm
 
 import {useFormik} from 'formik';
-import validationSchema from './ValidationSchema';
 
-const FormValidation = ({initialValues, handleSubmit}) => {
+const useValidation = ({initialValues, handleSubmit, validationSchema}) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -17,4 +16,4 @@ const FormValidation = ({initialValues, handleSubmit}) => {
   return formik;
 };
 
-export default FormValidation;
+export default useValidation;

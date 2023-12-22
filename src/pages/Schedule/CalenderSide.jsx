@@ -3,38 +3,24 @@
 
 import {Button, Stack} from '@mui/material';
 import React from 'react';
-import AddBtn from '../AddBtn';
 import SearchPeople from './SearchPeople';
-import CloseBtn from '../../../components/CloseBtn';
+import CloseBtn from '../../components/CloseBtn';
 import Calender from './Calender';
-import Overlay from '../../../components/Overlay';
+import Overlay from '../../components/Overlay';
+import AddIcon from '@mui/icons-material/Add';
+import {CalenderContainer, PlusIconBtn} from '../../theme/theme';
 
 const CalenderSide = ({sideBarOpened, toggleSideBar, which_element_to_show}) => {
   return (
     <>
-      <Stack
-        sx={{
-          width: {xs: '100%', xl: '30%'},
-          maxWidth: '385px',
-          height: {xs: '100vh', xl: 1000},
-          display: {xs: 'flex', xl: 'flex'},
-          justifyContent: 'space-between',
-          bgcolor: 'neutral.main',
-          padding: '30px 35px',
-          position: {xs: 'fixed', xl: 'static'},
-          top: 0,
-          right: 0,
-          zIndex: 60,
-          transform: sideBarOpened
-            ? 'translateX(0)'
-            : {xs: 'translateX(100%)', xl: 'translateX(0)'},
-          transition: theme => theme.transitions.create(['transform']),
-        }}
-      >
+      <CalenderContainer props={{sideBarOpened}}>
         {sideBarOpened && <CloseBtn toggleSideBar={toggleSideBar} />}
         <Stack gap={4} sx={{paddingTop: sideBarOpened && 5}}>
           {which_element_to_show !== 'Calender' && (
-            <AddBtn name='Create Schedule' width='100%' height='60px' />
+            <PlusIconBtn width='100%' height='60px'>
+              <AddIcon />
+              Create Schedule
+            </PlusIconBtn>
           )}
           {which_element_to_show !== 'Add Schedule' && <Calender />}
           {which_element_to_show !== 'Calender' && <SearchPeople />}
@@ -47,7 +33,7 @@ const CalenderSide = ({sideBarOpened, toggleSideBar, which_element_to_show}) => 
             My Schedule
           </Button>
         )}
-      </Stack>
+      </CalenderContainer>
       {sideBarOpened && <Overlay toggleSideBar={toggleSideBar} zIndex={50} />}
     </>
   );

@@ -201,6 +201,7 @@ const PieChart = ({data: categoryValues}) => {
       root.dispose();
       legend.dispose();
     };
+    // eslint-disable-next-line
   }, []);
 
   const totalValues = categoryValues.active + categoryValues.cancelled + categoryValues.completed;

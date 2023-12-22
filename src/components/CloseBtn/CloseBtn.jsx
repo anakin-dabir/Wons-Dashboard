@@ -5,12 +5,13 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 
-const CloseBtn = ({top = 2, right = 2, toggleSideBar} = {}) => {
+const CloseBtn = ({top = 2, right = 2, toggleSideBar, sx} = {}) => {
   return (
     <Button
       onClick={toggleSideBar}
       variant='paper'
       sx={{
+        ...sx,
         position: 'absolute',
         height: 65,
         width: 60,

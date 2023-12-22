@@ -7,17 +7,17 @@ import {Box, Stack, Typography, Button, InputLabel, CardMedia} from '@mui/materi
 import Logo from '../../assets/Frame.png';
 import InputField from '../../components/InputField';
 import ThemeChanger from '../../components/ThemeChanger';
+import {emailValidationSchema} from '../../components/forms/ValidationSchema';
 
 const ResetPassword = () => {
   const initialValues = {
     email: '',
   };
-  const handleSubmit = values => {
-    console.log(values);
-  };
+  const handleSubmit = values => {};
   const formik = useValidation({
     initialValues,
     handleSubmit,
+    validationSchema: emailValidationSchema,
   });
   return (
     <>
@@ -48,6 +48,7 @@ const ResetPassword = () => {
                 id='email'
                 name='email'
                 placeholder='example@gmail.com'
+                error={Boolean(formik.touched.email && formik.errors.email)}
               />
               {formik.touched.email && formik.errors.email && (
                 <Typography color='danger.main'>{formik.errors.email}</Typography>

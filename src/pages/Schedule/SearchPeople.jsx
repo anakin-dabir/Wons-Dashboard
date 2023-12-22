@@ -1,10 +1,16 @@
 // /src/pages/Schedule/CalenderSide/SearchPeople.jsx
 // Thursday, November 30th 2023, 5:00 am
 
-import {Avatar, Stack, Typography} from '@mui/material';
+import {Stack, Typography} from '@mui/material';
 import React, {useState, useTransition} from 'react';
-import InputField from '../../../components/InputField';
-import SearchIcon from './SearchIcon';
+import InputField from '../../components/InputField';
+import {
+  SearchDataContainer,
+  SearchedUserAvatar,
+  SearchedUserContainer,
+  SvgIcon,
+} from '../../theme/theme';
+import {ReactComponent as Searchicon} from '../../assets/Searchicon.svg';
 
 const data = [
   {
@@ -45,11 +51,15 @@ const SearchPeople = () => {
       <InputField
         height='60px'
         padding='15px 30px'
-        startIcon={<SearchIcon />}
+        startIcon={
+          <SvgIcon color='text.dim'>
+            <Searchicon />
+          </SvgIcon>
+        }
         onChange={searchFunction}
         placeholder='Search for People'
       />
-      <Stack gap='10px' sx={{overflowY: 'auto', height: '240px'}}>
+      <SearchDataContainer>
         {isPending ? (
           <Typography>Loading...</Typography>
         ) : searchData.length === 0 ? (
@@ -57,29 +67,19 @@ const SearchPeople = () => {
         ) : (
           searchData.map((item, index) => {
             return (
-              <Stack
-                key={index}
-                direction='row'
-                sx={{
-                  borderBottom: '1px solid',
-                  gap: '20px',
-                  padding: '0px 0px 15px 4px',
-                  alignItems: 'center',
-                  borderColor: theme => theme.palette.background.custom,
-                }}
-              >
-                <Avatar alt={item.name} sx={{height: '45px', width: '45px'}} src={item.img} />
+              <SearchedUserContainer key={index}>
+                <SearchedUserAvatar alt={item.name} src={item.img} />
                 <Stack>
                   <Typography>{item.name}</Typography>
                   <Typography variant='body2' sx={{opacity: '0.4'}}>
                     {item.email}
                   </Typography>
                 </Stack>
-              </Stack>
+              </SearchedUserContainer>
             );
           })
         )}
-      </Stack>
+      </SearchDataContainer>
     </Stack>
   );
 };

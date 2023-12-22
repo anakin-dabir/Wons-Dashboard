@@ -16,8 +16,17 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import InputField from '../../components/InputField';
 import {Link as NavLink} from 'react-router-dom';
+import useValidation from '../../components/forms/useValidation';
+import {LoginValidationSchema} from '../../components/forms/ValidationSchema';
 
 const Form = () => {
+  const initialValues = {email: '', password: ''};
+  const handleSubmit = values => {};
+  const formik = useValidation({
+    initialValues,
+    handleSubmit,
+    validationSchema: LoginValidationSchema,
+  });
   const [passwdType, setPasswdType] = useState('password');
   const togglePassword = useCallback(() => {
     passwdType === 'password' ? setPasswdType('text') : setPasswdType('password');
@@ -26,12 +35,26 @@ const Form = () => {
     <form className='w-full'>
       <Stack gap={2}>
         <InputLabel htmlFor='email'>Email Address</InputLabel>
-        <InputField id='email' placeholder='example@gmail.com' />
+        <InputField
+          id='email'
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          placeholder='example@gmail.com'
+          error={Boolean(formik.touched.email && formik.errors.email)}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <Typography variant='body2' color='danger.main'>
+            {formik.errors.email}
+          </Typography>
+        )}
         <InputLabel htmlFor='passwd'>Password</InputLabel>
         <InputField
-          id='passwd'
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          id='password'
           type={passwdType}
           placeholder='●●●●●●'
+          error={Boolean(formik.touched.password && formik.errors.password)}
           endAdornment={
             <InputAdornment sx={{cursor: 'pointer'}} position='end' onClick={togglePassword}>
               {passwdType === 'password' ? (
@@ -42,6 +65,11 @@ const Form = () => {
             </InputAdornment>
           }
         />
+        {formik.touched.password && formik.errors.password && (
+          <Typography variant='body2' color='danger.main'>
+            {formik.errors.password}
+          </Typography>
+        )}
         <Stack
           direction='row'
           justifyContent='space-between'
@@ -64,7 +92,9 @@ const Form = () => {
             </Typography>
           </NavLink>
         </Stack>
-        <Button fullWidth>Log In</Button>
+        <Button fullWidth onClick={formik.handleSubmit}>
+          Log In
+        </Button>
         <Typography align='center' variant='body2' fontWeight={500}>
           Don&apos;t have account yet?{' '}
           <Link underline='none' href='#'>

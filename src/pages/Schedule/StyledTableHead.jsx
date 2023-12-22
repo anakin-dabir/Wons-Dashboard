@@ -2,8 +2,8 @@
 // Saturday, December 2nd 2023, 12:30 am
 
 import React from 'react';
-import StyledTableCell from './StyledTableCell';
-import {TableRow, TableSortLabel, TableHead, Checkbox} from '@mui/material';
+import {StyledTableCell, TableSortIcon} from '../../theme/theme';
+import {TableRow, TableHead, Checkbox} from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const headCells = [
@@ -43,20 +43,14 @@ const StyledTableHead = ({
             key={headCell.id}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              sx={{
-                '& .MuiTableSortLabel-icon': {
-                  height: '33px',
-                  width: '30px',
-                },
-              }}
+            <TableSortIcon
               IconComponent={ArrowDropDownIcon}
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={() => onRequestSort(headCell.id)}
             >
               {headCell.label}
-            </TableSortLabel>
+            </TableSortIcon>
           </StyledTableCell>
         ))}
       </TableRow>

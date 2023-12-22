@@ -73,6 +73,7 @@ const useSort = ({_order = 'asc', _orderBy, data, page, rowsPerPage}) => {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
+    // eslint-disable-next-line
     [order, orderBy, page, rowsPerPage]
   );
 
