@@ -22,8 +22,8 @@ import {
   BottomAvatarContainer,
   BottomAvatar,
 } from '../../theme/theme';
-import {ReactComponent as HeartIcon} from '../../assets/HeartIcon.svg';
-import {ReactComponent as CommentIcon} from '../../assets/CommentIcon.svg';
+import HeartIcon from '../../assets/HeartIcon.svg';
+import CommentIcon from '../../assets/CommentIcon.svg';
 
 const TaskList = ({tasks, type, index, selectTagColor}) => {
   return (

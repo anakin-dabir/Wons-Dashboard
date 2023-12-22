@@ -7,7 +7,7 @@ import FilterBtn from './FilterBtn';
 import Links from './Links';
 import InputField from '../../components/InputField/InputField';
 import TaskContainer from './TaskContainer';
-import {ReactComponent as Searchicon} from '../../assets/Searchicon.svg';
+import Searchicon from '../../assets/Searchicon.svg';
 import {HeaderContainer, SvgIcon, TabPanel} from '../../theme/theme';
 
 const tags = [

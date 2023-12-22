@@ -10,7 +10,7 @@ import {
   SearchedUserContainer,
   SvgIcon,
 } from '../../theme/theme';
-import {ReactComponent as Searchicon} from '../../assets/Searchicon.svg';
+import Searchicon from '../../assets/Searchicon.svg';
 
 const data = [
   {

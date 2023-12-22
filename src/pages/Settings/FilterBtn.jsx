@@ -11,7 +11,7 @@ import {
   StyledPopper,
   TickIcon,
 } from '../../theme/theme';
-import {ReactComponent as Filtericon} from '../../assets/Filtericon.svg';
+import Filtericon from '../../assets/Filtericon.svg';
 
 const PopperComponent = props => {
   const {...other} = props;
