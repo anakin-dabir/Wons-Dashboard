@@ -19,7 +19,7 @@ const App = () => {
   const element = useRoutes([
     {
       path: "/",
-      element: token ? <Navigate to='/login' /> : <Layout sidebar />,
+      element: !token ? <Navigate to='/login' /> : <Layout sidebar />,
       children: [
         { path: "/", element: <Navigate to='/dashboard' /> },
         { path: "/dashboard", element: <DashBoard /> },
